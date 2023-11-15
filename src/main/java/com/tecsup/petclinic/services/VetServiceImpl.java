@@ -60,4 +60,9 @@ public class VetServiceImpl implements VetService {
         return vets;
     }
 
+    @Override
+    public List<Vet> findAll() {
+        return null;
+    }
+
 }

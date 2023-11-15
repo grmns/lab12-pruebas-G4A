@@ -2,6 +2,7 @@ package com.tecsup.petclinic.webs;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jayway.jsonpath.JsonPath;
+import com.tecsup.petclinic.domain.PetTO;
 import com.tecsup.petclinic.domain.VetTO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
@@ -78,5 +79,43 @@ class VetControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.firstName", is(vetFirstName)))
                 .andExpect(jsonPath("$.lastName", is(vetLastName)));
+    }
+
+    @Test
+    public void findById() throws Exception {
+
+        String first_name = "James";
+        int id = 1;
+
+        mockMvc.perform(get("/vets/1"))  // Object must be BASIL
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(1)))
+                .andExpect(jsonPath("$.firstName", is(first_name)));
+    }
+
+
+    @Test
+    public void delete() throws Exception {
+
+        String first_name = "Helen";
+        String last_name = "Leary";
+        int TYPE_ID = 1;
+
+        VetTO newVetTO = new VetTO();
+        newVetTO.setFirstName(first_name);
+        newVetTO.setLastName(last_name);
+
+        ResultActions mvcActions = mockMvc.perform(post("/vets")
+                        .content(om.writeValueAsString(newVetTO))
+                        .header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON))
+                .andDo(print())
+                .andExpect(status().isCreated());
+
+        String response = mvcActions.andReturn().getResponse().getContentAsString();
+
+        Integer id = JsonPath.parse(response).read("$.id");
+
     }
 }

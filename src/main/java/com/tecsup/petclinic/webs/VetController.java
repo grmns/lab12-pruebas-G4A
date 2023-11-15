@@ -36,11 +36,8 @@ public class VetController {
 
     @PutMapping(value = "/vets/{id}")
     ResponseEntity<VetTO>  update(@RequestBody VetTO vetTO, @PathVariable Integer id) {
-
         VetTO updateVetTO = null;
-
         try {
-
             Vet updateVet = vetService.findById(id);
 
             updateVet.setFirstName(vetTO.getFirstName());
@@ -55,6 +52,48 @@ public class VetController {
         }
 
         return ResponseEntity.ok(updateVetTO);
+    }
+
+    @GetMapping(value = "/vets")
+    public ResponseEntity<List<Vet>> findAllPets() {
+
+        List<Vet> vets = (List<Vet>) vetService.findAll();
+        log.info("vets: " + vets);
+        vets.forEach(item -> log.info("Vet >>  {} ", item));
+
+        List<VetTO> vetTOS = this.mapper.toVetTOList(vets);
+        log.info("vetsTO: " + vetTOS);
+        vetTOS.forEach(item -> log.info("VetTO >>  {} ", item));
+
+        return ResponseEntity.ok(vets);
+
+    }
+
+    @GetMapping(value = "/vets/{id}")
+    ResponseEntity<VetTO> findById(@PathVariable Integer id) {
+
+        VetTO vetTO = null;
+
+        try {
+            Vet vet = vetService.findById(id);
+            vetTO = this.mapper.toVetTO(vet);
+
+        } catch (VetNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(vetTO);
+
+    }
+
+    @DeleteMapping(value = "/vets/{id}")
+    ResponseEntity<String> delete(@PathVariable Integer id) {
+
+        try {
+            vetService.delete(id);
+            return ResponseEntity.ok(" Delete ID :" + id);
+        } catch (VetNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

@@ -18,4 +18,5 @@ public interface VetService {
 
     List<Vet> findByLastName(String lastName);
 
+    List<Vet> findAll();
 }

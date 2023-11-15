@@ -15,8 +15,8 @@ spring:
     # Windoows
     url : jdbc:mysql://localhost:3306/PETCLINIC_DB?useSSL=false&serverTimezone=UTC
     #modificar a tu los datos de tu base de datos
-    username : grmn
-    password : grmn72463758
+    username : root
+    password :
 
     platform : mysql
     initialization-mode : always
