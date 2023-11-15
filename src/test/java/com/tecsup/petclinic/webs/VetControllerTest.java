@@ -49,8 +49,8 @@ class VetControllerTest {
 
     @Test
     void testUpdateVet() throws Exception {
-        String FIRST_NAME = "German";
-        String LAST_NAME = "Sandoval";
+        String FIRST_NAME = "Juan";
+        String LAST_NAME = "Perez";
 
         VetTO newVetTO = new VetTO();
         newVetTO.setFirstName(FIRST_NAME);
@@ -64,8 +64,8 @@ class VetControllerTest {
                 .andExpect(jsonPath("$.firstName", is(FIRST_NAME)))
                 .andExpect(jsonPath("$.lastName", is(LAST_NAME)));
 
-        String vetFirstName = "Juan";
-        String vetLastName = "Perez";
+        String vetFirstName = "German";
+        String vetLastName = "Sandoval";
 
         VetTO updateVetTO = new VetTO();
         updateVetTO.setFirstName(vetFirstName);
