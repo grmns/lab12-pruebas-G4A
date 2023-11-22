@@ -65,7 +65,7 @@ class VetControllerTest {
                 .andExpect(jsonPath("$.firstName", is(FIRST_NAME)))
                 .andExpect(jsonPath("$.lastName", is(LAST_NAME)));
 
-        String vetFirstName = "German";
+        String vetFirstName = "Pepito";
         String vetLastName = "Sandoval";
 
         VetTO updateVetTO = new VetTO();
