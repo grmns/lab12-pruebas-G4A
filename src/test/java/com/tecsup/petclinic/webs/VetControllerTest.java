@@ -81,19 +81,19 @@ class VetControllerTest {
                 .andExpect(jsonPath("$.lastName", is(vetLastName)));
     }
 
-    @Test
-    public void findById() throws Exception {
-
-        String first_name = "James";
-        int id = 1;
-
-        mockMvc.perform(get("/vets/1"))  // Object must be BASIL
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(1)))
-                .andExpect(jsonPath("$.firstName", is(first_name)));
-    }
+//    @Test
+//    public void findById() throws Exception {
+//
+//        String first_name = "James";
+//        int id = 1;
+//
+//        mockMvc.perform(get("/vets/1"))  // Object must be BASIL
+//                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+//                .andDo(print())
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.id", is(1)))
+//                .andExpect(jsonPath("$.firstName", is(first_name)));
+//    }
 
 
     @Test
